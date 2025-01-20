@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: inventory
+  main:
+    web-application-type: reactive
+server:
+  port: 8082
