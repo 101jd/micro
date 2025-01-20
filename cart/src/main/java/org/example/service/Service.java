@@ -4,6 +4,7 @@ import org.example.model.Good;
 import org.example.repo.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -24,25 +25,31 @@ public class Service {
         this.template = template;
     }
 
+
     public Boolean addGood(Good good){
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-        
-        HttpEntity<Good> entity = new HttpEntity<>(repo.addGood(good), headers);
+
+        HttpEntity<Good> entity = new HttpEntity<>(good, headers);
 
         ResponseEntity<Boolean> response =
                 template.exchange(INVENTORY + GRAB, HttpMethod.POST, entity, Boolean.class);
+        if (response.getBody())
+            repo.addGood(good);
         return response.getBody();
     }
+
 
     public Boolean removeGood(Good good){
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        HttpEntity<Good> entity = new HttpEntity<>(repo.removeGood(good), headers);
+        HttpEntity<Good> entity = new HttpEntity<>(good, headers);
 
         ResponseEntity<Boolean> response =
                 template.exchange(INVENTORY + RETURN, HttpMethod.POST, entity, Boolean.class);
+        if (response.getBody())
+            repo.removeGood(good);
 
         return response.getBody();
     }
