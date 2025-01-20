@@ -3,8 +3,6 @@ package org.example.model;
 import lombok.Data;
 
 @Data
-public class Good {
-    private int id;
-    private String name;
+public class Order {
     private Double price;
 }

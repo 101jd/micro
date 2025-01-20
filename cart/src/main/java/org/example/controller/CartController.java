@@ -36,4 +36,9 @@ public class CartController {
     public ResponseEntity<List<Good>> allGoods(){
         return ResponseEntity.ok(service.findAll());
     }
+
+    @GetMapping("/buy")
+    public ResponseEntity<String> buy(){
+        return ResponseEntity.ok(service.buy());
+    }
 }

@@ -39,9 +39,19 @@ public class Repo {
             Good good = new Good();
             good.setId(r.getInt("id"));
             good.setName(r.getString("name"));
+            good.setPrice(r.getDouble("price"));
 
             return good;
         };
         return template.query("SELECT * FROM cart", mapper);
+    }
+
+    public Boolean flush(){
+        try {
+            template.update("DELETE FROM cart");
+            return true;
+        }catch (DataAccessException e){
+            return false;
+        }
     }
 }

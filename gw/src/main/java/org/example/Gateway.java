@@ -22,6 +22,10 @@ public class Gateway {
                         .path("/inv")
                         .filters(f -> f.addRequestHeader("name", "inventory"))
                         .uri("http://127.0.0.1:8082"))
+                .route(r -> r
+                        .path("/acc")
+                        .filters(f -> f.addRequestHeader("name", "acc"))
+                        .uri("http://127.0.0.1:8083"))
                 .build();
     }
 

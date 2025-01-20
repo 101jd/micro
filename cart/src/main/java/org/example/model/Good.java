@@ -6,4 +6,5 @@ import lombok.Data;
 public class Good {
     Integer id;
     String name;
+    Double price;
 }

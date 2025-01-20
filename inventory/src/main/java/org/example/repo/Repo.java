@@ -25,6 +25,7 @@ public class Repo {
             Good good = new Good();
             good.setId(r.getInt("id"));
             good.setName(r.getString("name"));
+            good.setPrice(r.getDouble("price"));
 
             return good;
         };
@@ -36,6 +37,7 @@ public class Repo {
             Good grabed = new Good();
             grabed.setId(r.getInt("id"));
             grabed.setName(r.getString("name"));
+            grabed.setPrice(r.getDouble("price"));
 
             return grabed;
         };

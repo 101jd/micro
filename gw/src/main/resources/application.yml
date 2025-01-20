@@ -19,3 +19,7 @@ spring:
           uri: http://127.0.0.1:8082
           predicates:
             - Path=/inv/**
+        - id: acc
+          uri : http://127.0.0.1:8083
+          predicates:
+            - Path=/acc/**
