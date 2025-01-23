@@ -31,6 +31,9 @@ public class Service {
 
 
     public Boolean addGood(Good good){
+        HttpHeaders headers = new HttpHeaders();
+        RestTemplate template = new RestTemplate();
+
         headers.setAccept(List.of(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
 

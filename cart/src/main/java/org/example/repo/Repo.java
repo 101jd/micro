@@ -3,6 +3,7 @@ package org.example.repo;
 import org.example.model.Good;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -53,5 +54,18 @@ public class Repo {
         }catch (DataAccessException e){
             return false;
         }
+    }
+
+    public Good getGoodById(int id){
+        ResultSetExtractor<Good> extractor = (r) -> {
+          Good good = new Good();
+          good.setId(r.getInt("id"));
+          good.setName(r.getString("name"));
+          good.setPrice(r.getDouble("price"));
+
+          return good;
+        };
+
+        return template.query("SELECT * FROM cart WHERE id = ?", new Object[]{id}, extractor);
     }
 }
