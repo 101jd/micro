@@ -1,7 +1,13 @@
 package org.example.controller;
 
+
+
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Metrics;
 import org.example.model.Good;
 import org.example.service.Service;
+import org.springframework.boot.actuate.autoconfigure.wavefront.WavefrontProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +18,8 @@ import java.util.List;
 public class InvController {
 
     private final Service service;
+
+    private final Counter counter = Metrics.counter("requests");
 
     public InvController(Service service) {
         this.service = service;
@@ -29,6 +37,7 @@ public class InvController {
 
     @PostMapping("/return")
     public ResponseEntity<Boolean> returnGood(@RequestBody Good good){
+        counter.increment();
         return ResponseEntity.ok(service.returnGood(good));
     }
 

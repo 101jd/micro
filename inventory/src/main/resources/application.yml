@@ -5,3 +5,11 @@ spring:
     web-application-type: reactive
 server:
   port: 8082
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, beans, prometheus, metrics
+  endpoint:
+    health:
+      show-details: always
